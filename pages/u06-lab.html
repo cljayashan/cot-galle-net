@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.7 Hands-on lab: Build a VPN | Server Administration and Networking</title>
+<meta name="description" content="6.7 Hands-on lab: Build a VPN. Unit 6 · Virtual Private Network (VPN) 6.7 Hands-on lab: Build a VPN Do these tasks on your own computer or in the lab using free software. Write down">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u06-lab.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 6 · Virtual Private Network (VPN)</div><h1><span class="num">6.7</span>Hands-on lab: Build a VPN</h1></header><article class="prose"><p>Do these tasks on your own computer or in the lab using free software. Write down what you see at each step: your notes are useful evidence for assessments and for revision.</p><ol class="tasks"><li>Build a WireGuard or OpenVPN server in a VM and connect a second VM or phone as a client.</li><li>Confirm the client receives a tunnel IP and can reach a private server (<code>ping 10.8.0.1</code>).</li><li>Use Wireshark to show that traffic on the physical interface is encrypted.</li></ol>
+<div class="callout tip"><p>In Wireshark, capture on the physical network adapter while you ping through the tunnel: you should see only UDP packets to port 51820 (WireGuard) with unreadable contents, not the ICMP pings.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

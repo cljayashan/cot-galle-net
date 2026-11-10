@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.9 Review: key terms and self-check | Server Administration and Networking</title>
+<meta name="description" content="5.9 Review: key terms and self-check. Unit 5 · Server Installation, Setting Up and Configuration 5.9 Review: key terms and self-check Key terms Make sure you can explain each of these in y">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u05-review.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 5 · Server Installation, Setting Up and Configuration</div><h1><span class="num">5.9</span>Review: key terms and self-check</h1></header><article class="prose"><h2 id="key-terms">Key terms</h2><p>Make sure you can explain each of these in your own words. The <a class="xref" href="appendix-a.html">glossary</a> has short definitions.</p><ul class="terms"><li>Server</li><li>client</li><li>dedicated</li><li>shared</li><li>VPS</li><li>cloud</li><li>hypervisor</li><li>RAID</li><li>Server Core</li><li>SSH</li><li>RDP</li><li>port</li><li>socket</li><li>service</li><li>daemon</li><li>role</li><li>package manager</li></ul><h2 id="self-check">Self-check questions</h2><p>Write your answers first, then open the answers to check them.</p><ol class="questions"><li>Give three differences between a desktop OS and a server OS.</li><li>Compare shared hosting and a VPS.</li><li>A company needs a server for a busy online shop with traffic spikes. Which option would you suggest and why?</li><li>Which port and protocol are used by SSH, HTTPS and DNS?</li><li>Why should password login be replaced by key-based login on SSH?</li><li>What does the command <code>ss -tulpn</code> show?</li><li>State two post-installation tasks you must do on every new server.</li></ol><details class="answers"><summary>Show answers</summary><div class="answers-body"><ol class="ans-list"><li><p>A server OS supports multiple simultaneous remote users and services, offers roles/services such as DNS and AD, has stronger remote management and security, supports server-grade hardware and is built for continuous uptime. (Any three.)</p></li><li><p>Shared: many sites on one OS, no root access, cheapest and limited control. VPS: isolated virtual machine with its own OS and root access, more resources and flexibility, somewhat higher cost.</p></li><li><p>A cloud server or auto-scaling VPS cluster, because it can scale up for traffic spikes and be billed by use; add load balancing and backups.</p></li><li><p>SSH 22 (TCP); HTTPS 443 (TCP); DNS 53 (UDP, TCP for large replies/zone transfers).</p></li><li><p>Keys are far harder to guess or brute-force than passwords and cannot be captured by typing; password login can then be disabled.</p></li><li><p>It lists listening TCP/UDP ports and the programs using them.</p></li><li><p>Apply updates, set a static IP/hostname, enable firewall, create a non-admin account, disable unneeded services, take a backup (any two).</p></li></ol></div></details><div class="callout tip"><p><strong>Next:</strong> when you are confident with this unit, test yourself with the <a class="xref" href="revision-mcq.html">multiple-choice questions</a> for Unit 5 in the Final Revision section.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

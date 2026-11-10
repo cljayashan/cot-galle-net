@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.5.3 Practical: HTTPS certificates | Server Administration and Networking</title>
+<meta name="description" content="8.5.3 Practical: HTTPS certificates. Unit 8 · Network Security 8.5.3 Practical: HTTPS certificates Practical: enable HTTPS with Let&#x27;s Encrypt (Ubuntu + Apache) Terminal Copy sudo apt inst">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u08-5-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 8 · Network Security</div><h1><span class="num">8.5.3</span>Practical: HTTPS certificates</h1></header><article class="prose"><h2 id="practical-enable-https-with-let-s-encrypt-ubuntu">Practical: enable HTTPS with Let&#x27;s Encrypt (Ubuntu + Apache)</h2>
+<div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo apt install certbot python3-certbot-apache -y
+sudo certbot --apache -d www.example.com
+sudo certbot renew --dry-run</code></pre></div>
+<div class="callout note"><p>This requires a real domain pointing to your server and ports 80/443 open.</p></div>
+<h2 id="practical-create-and-inspect-a-self-signed-certi">Practical: create and inspect a self-signed certificate</h2>
+<div class="code" id="code-2" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 365
+openssl x509 -in cert.pem -text -noout</code></pre></div><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u08-lab.html">8.6 hands-on lab</a> and the <a class="xref" href="u08-review.html">8.7 review questions</a>.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

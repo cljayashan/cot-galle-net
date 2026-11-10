@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9.3 Command-line tools | Server Administration and Networking</title>
+<meta name="description" content="9.3 Command-line tools. Unit 9 · Network Troubleshooting 9.3 Command-line tools Tool Windows Linux Use Show IP settings ipconfig /all ip a , ip route Check IP, mask, gateway,">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u09-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 9 · Network Troubleshooting</div><h1><span class="num">9.3</span>Command-line tools</h1></header><article class="prose"><div class="table-wrap"><table class="data"><thead><tr><th>Tool</th><th>Windows</th><th>Linux</th><th>Use</th></tr></thead><tbody><tr><td>Show IP settings</td><td><code>ipconfig /all</code></td><td><code>ip a</code>, <code>ip route</code></td><td>Check IP, mask, gateway, DNS, MAC</td></tr><tr><td>Renew address</td><td><code>ipconfig /release</code> and <code>/renew</code></td><td><code>sudo dhclient -r; sudo dhclient</code> (or <code>sudo networkctl renew &lt;interface&gt;</code>)</td><td>DHCP faults</td></tr><tr><td>Test reachability</td><td><code>ping</code></td><td><code>ping</code></td><td>Layer 3 connectivity and latency</td></tr><tr><td>Trace path</td><td><code>tracert</code></td><td><code>traceroute</code></td><td>Find where packets stop</td></tr><tr><td>Path quality</td><td><code>pathping</code></td><td><code>mtr</code></td><td>Loss at each hop</td></tr><tr><td>DNS lookup</td><td><code>nslookup</code></td><td><code>dig</code>, <code>nslookup</code></td><td>Test name resolution</td></tr><tr><td>Connections and ports</td><td><code>netstat -ano</code></td><td><code>ss -tulpn</code></td><td>See open ports, processes</td></tr><tr><td>ARP table</td><td><code>arp -a</code></td><td><code>ip neigh</code></td><td>IP-to-MAC mapping, duplicate IP</td></tr><tr><td>Port test</td><td><code>Test-NetConnection host -Port 443</code></td><td><code>nc -zv host 443</code></td><td>Is the service reachable?</td></tr><tr><td>Capture traffic</td><td>Wireshark</td><td><code>tcpdump</code>, Wireshark</td><td>Deep analysis</td></tr><tr><td>Web test</td><td>browser, <code>curl</code></td><td><code>curl -I http://site</code></td><td>Check HTTP response</td></tr><tr><td>Service status</td><td>Services, <code>Get-Service</code></td><td><code>systemctl status name</code></td><td>Is the application running?</td></tr><tr><td>Logs</td><td>Event Viewer</td><td><code>journalctl -xe</code>, <code>/var/log/*</code></td><td>Find the error message</td></tr><tr><td>Resources</td><td>Task Manager, <code>Get-Process</code></td><td><code>top</code>, <code>free -h</code>, <code>df -h</code></td><td>CPU, RAM, disk full</td></tr></tbody></table></div>
+<h2 id="interpreting-ping-results">Interpreting ping results</h2>
+<div class="table-wrap"><table class="data"><thead><tr><th>Result</th><th>Meaning</th></tr></thead><tbody><tr><td>Reply from address</td><td>Layer 3 path is working</td></tr><tr><td>Request timed out</td><td>Host down, ICMP blocked, or no route back</td></tr><tr><td>Destination host unreachable</td><td>No route or ARP failure; check IP, mask and gateway</td></tr><tr><td>General failure / transmit failed</td><td>Local interface or driver problem</td></tr><tr><td>High or variable time</td><td>Congestion, wireless interference, overloaded device</td></tr></tbody></table></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

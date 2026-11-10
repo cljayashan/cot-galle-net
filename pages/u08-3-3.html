@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.3.3 Comparison and the hybrid approach | Server Administration and Networking</title>
+<meta name="description" content="8.3.3 Comparison and the hybrid approach. Unit 8 · Network Security 8.3.3 Comparison and the hybrid approach Comparison Feature Symmetric Asymmetric Keys One shared secret key Public and priva">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u08-3-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 8 · Network Security</div><h1><span class="num">8.3.3</span>Comparison and the hybrid approach</h1></header><article class="prose"><h2 id="comparison">Comparison</h2>
+<div class="table-wrap"><table class="data"><thead><tr><th>Feature</th><th>Symmetric</th><th>Asymmetric</th></tr></thead><tbody><tr><td>Keys</td><td>One shared secret key</td><td>Public and private key pair</td></tr><tr><td>Speed</td><td>Fast</td><td>Slow</td></tr><tr><td>Key distribution</td><td>Difficult</td><td>Easy (public key can be shared openly)</td></tr><tr><td>Typical use</td><td>Bulk data, disk and VPN encryption</td><td>Key exchange, digital signatures, certificates</td></tr><tr><td>Examples</td><td>AES, ChaCha20</td><td>RSA, ECC, Diffie-Hellman</td></tr></tbody></table></div>
+<h2 id="hybrid-approach-how-https-works">Hybrid approach (how HTTPS works)</h2>
+<p>Real systems combine both: asymmetric cryptography (and certificates) authenticate the server and securely agree on a <strong>session key</strong>; then fast <strong>symmetric</strong> encryption protects the data.</p>
+<figure class="fig"><svg class="" viewBox="0 0 700 170" role="img" aria-label="Hybrid encryption: asymmetric key exchange then symmetric data encryption" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah475569" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs><rect x="20" y="30" width="290" height="100" rx="9" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.6"/><text x="165" y="68.95" class="t" font-size="14" fill="#7c3aed" text-anchor="middle" font-weight="700">1. Asymmetric (slow, little data)</text><text x="165" y="86.35" class="t" font-size="12" fill="#64748b" text-anchor="middle">certificate proves the server&#x27;s identity;</text><text x="165" y="101.95" class="t" font-size="12" fill="#64748b" text-anchor="middle">key exchange agrees a session key</text><path d="M316 80 L384 80" fill="none" stroke="#475569" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah475569)"/><circle cx="341" cy="58" r="6.3" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/><path d="M347.3 58 h16.2 M359 58 v5.4 M363.5 58 v4.5" fill="none" stroke="#ca8a04" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="390" y="30" width="290" height="100" rx="9" fill="#d1fae5" stroke="#059669" stroke-width="1.6"/><text x="535" y="68.95" class="t" font-size="14" fill="#059669" text-anchor="middle" font-weight="700">2. Symmetric (fast, all data)</text><text x="535" y="86.35" class="t" font-size="12" fill="#64748b" text-anchor="middle">AES or ChaCha20 encrypts every</text><text x="535" y="101.95" class="t" font-size="12" fill="#64748b" text-anchor="middle">byte with the session key</text><text x="350" y="158" class="t" font-size="12" fill="#ca8a04" text-anchor="middle" font-weight="700">session key</text></svg><figcaption>HTTPS combines both: slow asymmetric cryptography agrees a session key, then fast symmetric encryption protects all the data</figcaption></figure></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

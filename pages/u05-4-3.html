@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.4.3 Windows Server first tasks | Server Administration and Networking</title>
+<meta name="description" content="5.4.3 Windows Server first tasks. Unit 5 · Server Installation, Setting Up and Configuration 5.4.3 Windows Server first tasks Use Server Manager to rename the computer, set a static IP">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u05-4-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 5 · Server Installation, Setting Up and Configuration</div><h1><span class="num">5.4.3</span>Windows Server first tasks</h1></header><article class="prose"><p>Use <strong>Server Manager</strong> to rename the computer, set a static IP (Network Connections), run Windows Update, and add roles with <strong>Add Roles and Features</strong> (or PowerShell: <code>Install-WindowsFeature DNS -IncludeManagementTools</code>).</p>
+<div class="code" id="code-1" data-lang="powershell"><div class="code-head"><span class="lang lang-powershell">PowerShell</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-powershell">Rename-Computer -NewName SRV1 -Restart
+New-NetIPAddress -InterfaceAlias &quot;Ethernet&quot; -IPAddress 192.168.1.20 -PrefixLength 24 -DefaultGateway 192.168.1.1
+Set-DnsClientServerAddress -InterfaceAlias &quot;Ethernet&quot; -ServerAddresses 192.168.1.10
+Install-WindowsFeature DNS, DHCP -IncludeManagementTools
+Get-WindowsFeature | Where-Object Installed</code></pre></div>
+<div class="callout tip"><p>These PowerShell commands do the same jobs as Server Manager. Change the interface name (<code>Get-NetAdapter</code> lists them) and the addresses to suit your network.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.4 DNS record types | Server Administration and Networking</title>
+<meta name="description" content="7.4 DNS record types. Unit 7 · Domain Name System (DNS) 7.4 DNS record types Record Purpose Example A Name to IPv4 address www IN A 192.0.2.10 AAAA Name to IPv6 address www">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u07-4.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.4</span>DNS record types</h1></header><article class="prose"><div class="table-wrap"><table class="data"><thead><tr><th>Record</th><th>Purpose</th><th>Example</th></tr></thead><tbody><tr><td>A</td><td>Name to IPv4 address</td><td><code>www IN A 192.0.2.10</code></td></tr><tr><td>AAAA</td><td>Name to IPv6 address</td><td><code>www IN AAAA 2001:db8::10</code></td></tr><tr><td>CNAME</td><td>Alias to another name</td><td><code>web IN CNAME www.example.com.</code></td></tr><tr><td>MX</td><td>Mail server for the domain (with priority)</td><td><code>@ IN MX 10 mail.example.com.</code></td></tr><tr><td>NS</td><td>Name servers for the zone</td><td><code>@ IN NS ns1.example.com.</code></td></tr><tr><td>PTR</td><td>IP address to name (reverse lookup)</td><td><code>10 IN PTR www.example.com.</code></td></tr><tr><td>SOA</td><td>Start of Authority: primary server, serial, refresh timers</td><td>one per zone</td></tr><tr><td>TXT</td><td>Free text; used for SPF, DKIM, domain verification</td><td><code>&quot;v=spf1 mx -all&quot;</code></td></tr><tr><td>SRV</td><td>Location of a service</td><td>used by Active Directory, SIP</td></tr></tbody></table></div>
+<div class="callout warn"><p><strong>The trailing dot matters.</strong> In a zone file <code>mail.example.com.</code> is a complete name. Without the final dot BIND adds the zone name, so <code>mail.example.com</code> becomes <code>mail.example.com.example.com.</code></p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

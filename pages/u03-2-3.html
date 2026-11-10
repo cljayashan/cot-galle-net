@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.2.3 Basic router configuration | Server Administration and Networking</title>
+<meta name="description" content="3.2.3 Basic router configuration. Unit 3 · Network Devices and Protocols 3.2.3 Basic router configuration Cisco IOS CLI Copy Router&gt; enable Router# configure terminal Router(config)# h">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u03-2-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 3 · Network Devices and Protocols</div><h1><span class="num">3.2.3</span>Basic router configuration</h1></header><article class="prose"><div class="code" id="code-1" data-lang="cisco"><div class="code-head"><span class="lang lang-cisco">Cisco IOS CLI</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-cisco">Router&gt; enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# interface gigabitEthernet 0/0
+R1(config-if)# ip address 192.168.1.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface gigabitEthernet 0/1
+R1(config-if)# ip address 10.0.0.1 255.255.255.252
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2
+R1(config)# end
+R1# copy running-config startup-config
+R1# show ip route
+R1# show ip interface brief</code></pre></div>
+<div class="callout tip"><p><strong>The prompt tells you where you are:</strong> <code>R1&gt;</code> user mode, <code>R1#</code> privileged mode, <code>R1(config)#</code> global configuration, <code>R1(config-if)#</code> interface configuration. <code>exit</code> goes back one level; <code>end</code> returns straight to <code>R1#</code>, where <code>show</code> and <code>copy</code> commands are run.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

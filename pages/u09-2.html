@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9.2 Layer-by-layer symptoms | Server Administration and Networking</title>
+<meta name="description" content="9.2 Layer-by-layer symptoms. Unit 9 · Network Troubleshooting 9.2 Layer-by-layer symptoms Layer Typical faults Checks 1 Physical Unplugged or faulty cable, dead port, no power, da">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u09-2.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 9 · Network Troubleshooting</div><h1><span class="num">9.2</span>Layer-by-layer symptoms</h1></header><article class="prose"><div class="table-wrap"><table class="data"><thead><tr><th>Layer</th><th>Typical faults</th><th>Checks</th></tr></thead><tbody><tr><td>1 Physical</td><td>Unplugged or faulty cable, dead port, no power, damaged fibre</td><td>Link lights, swap cable, cable tester, check port</td></tr><tr><td>2 Data link</td><td>Wrong VLAN, duplex mismatch, MAC filtering, loop</td><td><code>show interfaces</code>, VLAN membership, switch MAC table</td></tr><tr><td>3 Network</td><td>Wrong IP, mask or gateway, duplicate IP, routing fault, APIPA address</td><td><code>ipconfig</code>, <code>ping</code>, <code>tracert</code>, routing table</td></tr><tr><td>4 Transport</td><td>Port blocked by firewall, service not listening</td><td><code>netstat</code>/<code>ss</code>, <code>telnet host port</code>, firewall rules</td></tr><tr><td>5-7 Application</td><td>Service stopped, misconfiguration, certificate expired, DNS error</td><td>Service status, application logs, browser errors</td></tr></tbody></table></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

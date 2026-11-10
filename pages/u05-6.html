@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.6 Server applications and tools | Server Administration and Networking</title>
+<meta name="description" content="5.6 Server applications and tools. Unit 5 · Server Installation, Setting Up and Configuration 5.6 Server applications and tools Common server applications Service Linux Windows Web Apac">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u05-6.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 5 · Server Installation, Setting Up and Configuration</div><h1><span class="num">5.6</span>Server applications and tools</h1></header><article class="prose"><h2 id="common-server-applications">Common server applications</h2>
+<div class="table-wrap"><table class="data"><thead><tr><th>Service</th><th>Linux</th><th>Windows</th></tr></thead><tbody><tr><td>Web</td><td>Apache, Nginx</td><td>IIS</td></tr><tr><td>Database</td><td>MySQL/MariaDB, PostgreSQL</td><td>SQL Server</td></tr><tr><td>File sharing</td><td>Samba, NFS</td><td>File Server role (SMB)</td></tr><tr><td>DHCP</td><td>isc-dhcp-server, dnsmasq</td><td>DHCP Server role</td></tr><tr><td>DNS</td><td>BIND9</td><td>DNS Server role</td></tr><tr><td>Mail</td><td>Postfix, Dovecot</td><td>Exchange</td></tr><tr><td>Directory</td><td>OpenLDAP, FreeIPA</td><td>Active Directory Domain Services</td></tr></tbody></table></div>
+<p><strong>Install and test a web server (Ubuntu):</strong></p>
+<div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo apt install apache2 -y
+systemctl status apache2
+curl http://localhost</code></pre></div>
+<p>Open a browser on another computer to <code>http://server-ip</code>; the default Apache page confirms success. Content lives in <code>/var/www/html</code>.</p>
+<h2 id="administration-tools">Administration tools</h2>
+<div class="table-wrap"><table class="data"><thead><tr><th>Task</th><th>Linux</th><th>Windows</th></tr></thead><tbody><tr><td>Manage services</td><td><code>systemctl start/stop/enable</code></td><td>Services console, <code>Get-Service</code></td></tr><tr><td>View processes</td><td><code>top</code>, <code>htop</code>, <code>ps</code></td><td>Task Manager, <code>Get-Process</code></td></tr><tr><td>Disk usage</td><td><code>df -h</code>, <code>du -sh</code></td><td>Disk Management, Storage Spaces</td></tr><tr><td>Users and groups</td><td><code>adduser</code>, <code>usermod</code>, <code>chmod</code>, <code>chown</code></td><td>Active Directory Users and Computers, Local Users</td></tr><tr><td>Logs</td><td><code>/var/log</code>, <code>journalctl</code></td><td>Event Viewer</td></tr><tr><td>Packages and updates</td><td><code>apt</code>, <code>dnf</code></td><td>Windows Update, WSUS</td></tr><tr><td>Scheduling</td><td><code>cron</code></td><td>Task Scheduler</td></tr><tr><td>Monitoring</td><td>Nagios, Zabbix, Prometheus</td><td>Performance Monitor, SCOM</td></tr><tr><td>Backup</td><td><code>rsync</code>, <code>tar</code>, Bacula</td><td>Windows Server Backup</td></tr></tbody></table></div>
+<p><strong>Linux permissions:</strong> <code>chmod 750 file</code> gives owner rwx (7), group r-x (5), others none (0).</p></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

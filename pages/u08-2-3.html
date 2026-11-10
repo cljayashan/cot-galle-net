@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.2.3 Configuring firewalls: UFW, Windows and iptables | Server Administration and Networking</title>
+<meta name="description" content="8.2.3 Configuring firewalls: UFW, Windows and iptables. Unit 8 · Network Security 8.2.3 Configuring firewalls: UFW, Windows and iptables On this page UFW on Ubuntu Windows Defender Firewall iptables on Linu">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u08-2-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 8 · Network Security</div><h1><span class="num">8.2.3</span>Configuring firewalls: UFW, Windows and iptables</h1></header><details class="mini-toc" open><summary>On this page</summary><ol><li><a href="#ufw-on-ubuntu">UFW on Ubuntu</a></li><li><a href="#windows-defender-firewall">Windows Defender Firewall</a></li><li><a href="#iptables-on-linux">iptables on Linux</a></li></ol></details><article class="prose"><h2 id="ufw-on-ubuntu">UFW on Ubuntu</h2>
+<div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp          # SSH
+sudo ufw allow 80/tcp          # HTTP
+sudo ufw allow 443/tcp         # HTTPS
+sudo ufw allow from 192.168.1.0/24 to any port 3306   # database only from LAN
+sudo ufw enable
+sudo ufw status verbose</code></pre></div>
+<h2 id="windows-defender-firewall">Windows Defender Firewall</h2>
+<p>Open Windows Defender Firewall with Advanced Security; create an <strong>Inbound Rule</strong> &gt; Port &gt; TCP 443 &gt; Allow the connection &gt; choose profiles (Domain/Private/Public) &gt; name the rule. Use <code>New-NetFirewallRule</code> in PowerShell for automation.</p>
+<h2 id="iptables-on-linux">iptables on Linux</h2>
+<div class="code" id="code-2" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo iptables -A INPUT -i lo -j ACCEPT                                        # local traffic
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT   # replies
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT                            # SSH
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT                            # HTTP
+sudo iptables -A INPUT -j DROP                                                # everything else
+sudo iptables -L -n -v --line-numbers</code></pre></div>
+<div class="callout warn"><p><strong>Do not lock yourself out.</strong> A rule set that only allows port 80 and then drops everything also blocks SSH, local (loopback) traffic and the replies to the server&#x27;s own connections, so a remote server becomes unreachable. Allow loopback, established connections and SSH first. iptables rules are lost at reboot unless saved (for example with the <code>iptables-persistent</code> package).</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9.7 Documentation | Server Administration and Networking</title>
+<meta name="description" content="9.7 Documentation. Unit 9 · Network Troubleshooting 9.7 Documentation Write a trouble ticket : date, reporter, symptom, affected systems, tests performed, root cause, fi">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u09-7.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 9 · Network Troubleshooting</div><h1><span class="num">9.7</span>Documentation</h1></header><article class="prose"><p>Write a <strong>trouble ticket</strong>: date, reporter, symptom, affected systems, tests performed, root cause, fix, time to resolve and follow-up action. A knowledge base of past fixes saves time later.</p>
+<h2 id="sample-ticket">Sample trouble ticket</h2><div class="table-wrap"><table class="data"><thead><tr><th>Field</th><th>Example</th></tr></thead><tbody>
+<tr><td>Ticket / date</td><td>#0142 · 14 March 2026, 10:20</td></tr>
+<tr><td>Reported by</td><td>Accounts office, PC ACC-03</td></tr>
+<tr><td>Symptom</td><td>Cannot open websites; email in Outlook still works</td></tr>
+<tr><td>Affected systems</td><td>One PC only</td></tr>
+<tr><td>Tests performed</td><td><code>ping 8.8.8.8</code> succeeds; <code>ping www.google.com</code> fails; <code>ipconfig /all</code> shows DNS server 192.168.1.100</td></tr>
+<tr><td>Root cause</td><td>DNS server address typed incorrectly (should be 192.168.1.10)</td></tr>
+<tr><td>Fix</td><td>Set the adapter back to obtain DNS automatically (DHCP); <code>ipconfig /flushdns</code></td></tr>
+<tr><td>Time to resolve</td><td>15 minutes</td></tr>
+<tr><td>Follow-up</td><td>Remove local administrator rights so users cannot change network settings</td></tr></tbody></table></div><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u09-lab.html">9.8 hands-on lab</a> and the <a class="xref" href="u09-review.html">9.9 review questions</a>.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

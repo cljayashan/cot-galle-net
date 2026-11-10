@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.5.1 VLSM and the default gateway | Server Administration and Networking</title>
+<meta name="description" content="4.5.1 VLSM and the default gateway. Unit 4 · Addressing Network Devices 4.5.1 VLSM and the default gateway VLSM (Variable Length Subnet Masking) VLSM lets you use different prefix length">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u04-5-1.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 4 · Addressing Network Devices</div><h1><span class="num">4.5.1</span>VLSM and the default gateway</h1></header><article class="prose"><h2 id="vlsm-variable-length-subnet-masking">VLSM (Variable Length Subnet Masking)</h2>
+<p>VLSM lets you use different prefix lengths so that no addresses are wasted. Procedure: sort requirements from largest to smallest and allocate in that order.</p>
+<p>Example: from <code>192.168.5.0/24</code> provide LAN A (100 hosts), LAN B (50 hosts), LAN C (20 hosts), and a router link (2 hosts).</p>
+<ul><li>LAN A: 100 hosts needs /25 → 192.168.5.0/25 (0-127)</li><li>LAN B: 50 hosts needs /26 → 192.168.5.128/26 (128-191)</li><li>LAN C: 20 hosts needs /27 → 192.168.5.192/27 (192-223)</li><li>Link: 2 hosts needs /30 → 192.168.5.224/30 (224-227)</li></ul>
+<figure class="fig"><svg class="" viewBox="0 0 700 210" role="img" aria-label="VLSM allocation of 192.168.5.0/24" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="54" width="308" height="50" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/><text x="195" y="76" class="t" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="700">LAN A</text><text x="195" y="94" class="t" font-size="11.5" fill="#2563eb" text-anchor="middle">/25 · 126 hosts</text><rect x="350" y="54" width="153" height="50" rx="6" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="427.5" y="76" class="t" font-size="14" fill="#059669" text-anchor="middle" font-weight="700">LAN B</text><text x="427.5" y="94" class="t" font-size="11.5" fill="#059669" text-anchor="middle">/26 · 62</text><rect x="505" y="54" width="75.5" height="50" rx="6" fill="#ffedd5" stroke="#ea580c" stroke-width="1.8"/><text x="543.75" y="76" class="t" font-size="14" fill="#ea580c" text-anchor="middle" font-weight="700">LAN C</text><text x="543.75" y="94" class="t" font-size="11.5" fill="#ea580c" text-anchor="middle">/27 · 30</text><rect x="582.5" y="54" width="9.6875" height="50" rx="2" fill="#dc2626" stroke="#dc2626" stroke-width="1"/><rect x="594.188" y="54" width="65.8125" height="50" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="5 4"/><text x="626.094" y="84" class="t" font-size="12" fill="#64748b" text-anchor="middle" font-weight="700">free</text><path d="M587.344 54 L587.344 36" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><text x="587.344" y="30" class="t" font-size="11.5" fill="#dc2626" text-anchor="end" font-weight="700">Router link /30 (2 hosts)</text><text x="40" y="122" class="t code-t" font-size="11" fill="#64748b" text-anchor="start">.0</text><text x="350" y="122" class="t code-t" font-size="11" fill="#64748b" text-anchor="start">.128</text><text x="505" y="122" class="t code-t" font-size="11" fill="#64748b" text-anchor="start">.192</text><text x="582.5" y="122" class="t code-t" font-size="11" fill="#64748b" text-anchor="start">.224</text><text x="660" y="122" class="t code-t" font-size="11" fill="#64748b" text-anchor="end">.255</text><text x="350" y="160" class="t" font-size="12.5" fill="#334155" text-anchor="middle" font-weight="700">Sort requirements from largest to smallest, then allocate each the smallest block that fits</text><text x="350" y="182" class="t code-t" font-size="12" fill="#64748b" text-anchor="middle">100 hosts → /25 (126) · 50 → /26 (62) · 20 → /27 (30) · 2 → /30 (2)</text></svg><figcaption>VLSM plan for 192.168.5.0/24: each subnet is just big enough, largest first, leaving space for future growth</figcaption></figure>
+<div class="lab" id="vlsm-lab"></div>
+<h2 id="default-gateway">Default gateway</h2>
+<p>To reach any address outside its own subnet, a host sends traffic to its <strong>default gateway</strong> (the router interface on its subnet). A wrong gateway or mask is among the most common causes of connectivity faults.</p></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

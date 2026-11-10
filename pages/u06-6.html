@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.6 Quick set-up outline (WireGuard on Ubuntu) | Server Administration and Networking</title>
+<meta name="description" content="6.6 Quick set-up outline (WireGuard on Ubuntu). Unit 6 · Virtual Private Network (VPN) 6.6 Quick set-up outline (WireGuard on Ubuntu) Terminal Copy sudo apt install wireguard -y umask 077 # new file">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u06-6.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 6 · Virtual Private Network (VPN)</div><h1><span class="num">6.6</span>Quick set-up outline (WireGuard on Ubuntu)</h1></header><article class="prose"><div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo apt install wireguard -y
+umask 077                            # new files readable only by you
+wg genkey | tee server.key | wg pubkey &gt; server.pub
+sudo nano /etc/wireguard/wg0.conf    # add the [Interface] and [Peer] sections shown below
+sudo wg-quick up wg0
+sudo wg show</code></pre></div>
+<p>The <code>[Interface]</code> section holds the server&#x27;s private key, tunnel address (for example <code>10.8.0.1/24</code>) and listening port; each <code>[Peer]</code> holds a client&#x27;s public key and allowed IP. Open the UDP port on the firewall (<code>sudo ufw allow 51820/udp</code>) and, if clients must reach the LAN behind the server, enable IP forwarding (<code>net.ipv4.ip_forward=1</code> in <code>/etc/sysctl.conf</code>).</p>
+<div class="code" id="code-2" data-lang="ini"><div class="code-head"><span class="lang lang-ini">Configuration file</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-ini">[Interface]
+Address    = 10.8.0.1/24
+ListenPort = 51820
+PrivateKey = &lt;contents of server.key&gt;
+
+[Peer]
+PublicKey  = &lt;the client&#x27;s public key&gt;
+AllowedIPs = 10.8.0.2/32</code></pre></div>
+<figure class="fig"><svg class="" viewBox="0 0 700 240" role="img" aria-label="WireGuard server with two peers" xmlns="http://www.w3.org/2000/svg"><path d="M110 70 L330 112" fill="none" stroke="#059669" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/><path d="M110 180 L330 120" fill="none" stroke="#059669" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/><path d="M380 116 L580 116" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="57" y="48" width="46" height="32" rx="4" fill="#fff" stroke="#2563eb" stroke-width="2"/><rect x="61" y="52" width="38" height="24" rx="2" fill="#dbeafe" stroke="#dbeafe" stroke-width="0"/><path d="M80 80 v7 M67 87 h26" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="108" class="t" font-size="12.5" fill="#2563eb" text-anchor="middle" font-weight="700">Peer 1 (laptop)</text><text x="80" y="123" class="t code-t" font-size="11" fill="#64748b" text-anchor="middle">10.8.0.2</text><rect x="57" y="158" width="46" height="32" rx="4" fill="#fff" stroke="#2563eb" stroke-width="2"/><rect x="61" y="162" width="38" height="24" rx="2" fill="#dbeafe" stroke="#dbeafe" stroke-width="0"/><path d="M80 190 v7 M67 197 h26" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="218" class="t" font-size="12.5" fill="#2563eb" text-anchor="middle" font-weight="700">Peer 2 (home PC)</text><text x="80" y="233" class="t code-t" font-size="11" fill="#64748b" text-anchor="middle">10.8.0.3</text><rect x="330" y="86" width="40" height="52" rx="5" fill="#d1fae5" stroke="#059669" stroke-width="2"/><rect x="335" y="94" width="30" height="9" rx="2" fill="#fff" stroke="#059669" stroke-width="1.2"/><circle cx="360" cy="98.5" r="1.8" fill="#059669" stroke="#059669" stroke-width="0.5"/><rect x="335" y="108" width="30" height="9" rx="2" fill="#fff" stroke="#059669" stroke-width="1.2"/><circle cx="360" cy="112.5" r="1.8" fill="#059669" stroke="#059669" stroke-width="0.5"/><rect x="335" y="122" width="30" height="9" rx="2" fill="#fff" stroke="#059669" stroke-width="1.2"/><circle cx="360" cy="126.5" r="1.8" fill="#059669" stroke="#059669" stroke-width="0.5"/><text x="350" y="154" class="t" font-size="12.5" fill="#059669" text-anchor="middle" font-weight="700">WireGuard server</text><text x="350" y="169" class="t code-t" font-size="11" fill="#64748b" text-anchor="middle">wg0 10.8.0.1/24</text><text x="350" y="183" class="t code-t" font-size="11" fill="#64748b" text-anchor="middle">UDP 51820</text><rect x="600" y="90" width="40" height="52" rx="5" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/><rect x="605" y="98" width="30" height="9" rx="2" fill="#fff" stroke="#4f46e5" stroke-width="1.2"/><circle cx="630" cy="102.5" r="1.8" fill="#4f46e5" stroke="#4f46e5" stroke-width="0.5"/><rect x="605" y="112" width="30" height="9" rx="2" fill="#fff" stroke="#4f46e5" stroke-width="1.2"/><circle cx="630" cy="116.5" r="1.8" fill="#4f46e5" stroke="#4f46e5" stroke-width="0.5"/><rect x="605" y="126" width="30" height="9" rx="2" fill="#fff" stroke="#4f46e5" stroke-width="1.2"/><circle cx="630" cy="130.5" r="1.8" fill="#4f46e5" stroke="#4f46e5" stroke-width="0.5"/><text x="620" y="158" class="t" font-size="12.5" fill="#4f46e5" text-anchor="middle" font-weight="700">Private server</text><text x="620" y="173" class="t code-t" font-size="11" fill="#64748b" text-anchor="middle">192.168.1.20</text><rect x="162.64" y="73.075" width="114.72" height="15.525" rx="3" fill="#fff" stroke="#fff" stroke-width="0"/><text x="220" y="84" class="t" font-size="11.5" fill="#059669" text-anchor="middle" font-weight="700">encrypted tunnel</text></svg><figcaption>A WireGuard server on UDP 51820 gives each peer a tunnel address in 10.8.0.0/24 and forwards its traffic to the private LAN</figcaption></figure><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u06-lab.html">6.7 hands-on lab</a> and the <a class="xref" href="u06-review.html">6.8 review questions</a>.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

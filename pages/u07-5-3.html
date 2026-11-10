@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.5.3 Reverse zones, management and testing | Server Administration and Networking</title>
+<meta name="description" content="7.5.3 Reverse zones, management and testing. Unit 7 · Domain Name System (DNS) 7.5.3 Reverse zones, management and testing Reverse lookup zones For the 192.168.1.0/24 network the reverse zone is ">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u07-5-3.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.5.3</span>Reverse zones, management and testing</h1></header><article class="prose"><h2 id="reverse-lookup-zones">Reverse lookup zones</h2>
+<p>For the 192.168.1.0/24 network the reverse zone is <code>1.168.192.in-addr.arpa</code>; PTR records map the last octet to a name.</p>
+<figure class="fig"><svg class="" viewBox="0 0 700 190" role="img" aria-label="Reverse lookup name for 192.168.1.10" xmlns="http://www.w3.org/2000/svg"><rect x="150" y="20" width="64" height="36" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/><text x="182" y="43.6" class="t code-t" font-size="16" fill="#2563eb" text-anchor="middle" font-weight="700">192</text><path d="M182 56 L422 100" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="390" y="100" width="64" height="36" rx="9" fill="#2563eb" stroke="#2563eb" stroke-width="1.6"/><text x="422" y="123.6" class="t code-t" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">192</text><rect x="230" y="20" width="64" height="36" rx="9" fill="#d1fae5" stroke="#059669" stroke-width="1.6"/><text x="262" y="43.6" class="t code-t" font-size="16" fill="#059669" text-anchor="middle" font-weight="700">168</text><path d="M262 56 L342 100" fill="none" stroke="#059669" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="310" y="100" width="64" height="36" rx="9" fill="#059669" stroke="#059669" stroke-width="1.6"/><text x="342" y="123.6" class="t code-t" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">168</text><rect x="310" y="20" width="64" height="36" rx="9" fill="#ffedd5" stroke="#ea580c" stroke-width="1.6"/><text x="342" y="43.6" class="t code-t" font-size="16" fill="#ea580c" text-anchor="middle" font-weight="700">1</text><path d="M342 56 L262 100" fill="none" stroke="#ea580c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="230" y="100" width="64" height="36" rx="9" fill="#ea580c" stroke="#ea580c" stroke-width="1.6"/><text x="262" y="123.6" class="t code-t" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">1</text><rect x="390" y="20" width="64" height="36" rx="9" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.6"/><text x="422" y="43.6" class="t code-t" font-size="16" fill="#7c3aed" text-anchor="middle" font-weight="700">10</text><path d="M422 56 L182 100" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="150" y="100" width="64" height="36" rx="9" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.6"/><text x="182" y="123.6" class="t code-t" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">10</text><text x="470" y="124" class="t code-t" font-size="16" fill="#334155" text-anchor="start" font-weight="700">.in-addr.arpa</text><text x="130" y="44" class="t" font-size="12" fill="#64748b" text-anchor="end" font-style="italic">address</text><text x="130" y="124" class="t" font-size="12" fill="#64748b" text-anchor="end" font-style="italic">reverse name</text><text x="350" y="172" class="t code-t" font-size="13" fill="#4f46e5" text-anchor="middle" font-weight="700">zone 1.168.192.in-addr.arpa  ·  record  10  IN  PTR  www.school.lk.</text></svg><figcaption>A reverse lookup writes the network octets backwards under in-addr.arpa; a PTR record maps the address back to a name</figcaption></figure>
+<div class="code" id="code-1" data-lang="conf"><div class="code-head"><span class="lang lang-conf">Configuration file</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-conf">zone &quot;1.168.192.in-addr.arpa&quot; {
+    type master;
+    file &quot;/etc/bind/db.192.168.1&quot;;
+};</code></pre></div>
+<div class="code" id="code-2" data-lang="zone"><div class="code-head"><span class="lang lang-zone">DNS zone file</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-zone">$TTL 3600
+@   IN SOA ns1.school.lk. admin.school.lk. ( 2025010101 3600 900 604800 3600 )
+@   IN NS  ns1.school.lk.
+10  IN PTR ns1.school.lk.
+20  IN PTR www.school.lk.
+25  IN PTR mail.school.lk.</code></pre></div>
+<h2 id="managing-and-testing-dns">Managing and testing DNS</h2>
+<div class="code" id="code-3" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">nslookup www.school.lk 192.168.1.10
+dig www.school.lk @192.168.1.10
+dig MX school.lk
+ipconfig /flushdns         # Windows: clear client cache
+resolvectl flush-caches    # Linux</code></pre></div>
+<p>Management tasks: add, change and delete records, set suitable TTLs, keep secondary servers in sync, secure <strong>zone transfers</strong> (allow only listed secondaries), enable logging, back up zone files, and consider <strong>DNSSEC</strong> (signs records so answers can be verified).</p></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.5 Hands-on lab: Devices, VLANs and packet capture | Server Administration and Networking</title>
+<meta name="description" content="3.5 Hands-on lab: Devices, VLANs and packet capture. Unit 3 · Network Devices and Protocols 3.5 Hands-on lab: Devices, VLANs and packet capture Do these tasks on your own computer or in the lab using fre">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u03-lab.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 3 · Network Devices and Protocols</div><h1><span class="num">3.5</span>Hands-on lab: Devices, VLANs and packet capture</h1></header><article class="prose"><p>Do these tasks on your own computer or in the lab using free software. Write down what you see at each step: your notes are useful evidence for assessments and for revision.</p><ol class="tasks"><li>In Packet Tracer build: two PCs on a switch (192.168.1.0/24) and a server in a second network behind a router. Configure the router interfaces and test with <code>ping</code>.</li><li>Create two VLANs and show that hosts in different VLANs cannot ping each other without a router.</li><li>Run Wireshark, open a web page, and identify an Ethernet frame, IP packet, TCP segment and HTTP request. Write which OSI layer each belongs to.</li><li>Capture a DHCP exchange (<code>ipconfig /release</code> then <code>ipconfig /renew</code>) and identify the four DORA messages.</li></ol>
+<div class="callout tip"><p><strong>Useful Wireshark display filters:</strong> <code>dhcp</code> (shows the DORA messages), <code>http</code>, <code>dns</code>, <code>tcp.port == 80</code> and <code>arp</code>. Click a packet to see each layer&#x27;s header in the middle pane.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

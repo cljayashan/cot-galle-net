@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.5.1 BIND9 on Ubuntu | Server Administration and Networking</title>
+<meta name="description" content="7.5.1 BIND9 on Ubuntu. Unit 7 · Domain Name System (DNS) 7.5.1 BIND9 on Ubuntu Terminal Copy sudo apt install bind9 bind9utils -y In /etc/bind/named.conf.local declare the z">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u07-5-1.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.5.1</span>BIND9 on Ubuntu</h1></header><article class="prose"><div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo apt install bind9 bind9utils -y</code></pre></div>
+<p>In <code>/etc/bind/named.conf.local</code> declare the zone:</p>
+<div class="code" id="code-2" data-lang="conf"><div class="code-head"><span class="lang lang-conf">Configuration file</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-conf">zone &quot;school.lk&quot; {
+    type master;
+    file &quot;/etc/bind/db.school.lk&quot;;
+};</code></pre></div>
+<p>Create <code>/etc/bind/db.school.lk</code>:</p>
+<div class="callout note"><p>Newer BIND versions also accept <code>type primary;</code>, the modern name for <code>type master;</code>.</p></div>
+<div class="code" id="code-3" data-lang="zone"><div class="code-head"><span class="lang lang-zone">DNS zone file</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-zone">$TTL 3600
+@   IN SOA ns1.school.lk. admin.school.lk. (
+        2025010101 ; serial
+        3600       ; refresh
+        900        ; retry
+        604800     ; expire
+        3600 )     ; negative cache TTL
+@     IN NS  ns1.school.lk.
+ns1   IN A   192.168.1.10
+www   IN A   192.168.1.20
+mail  IN A   192.168.1.25
+@     IN MX  10 mail.school.lk.</code></pre></div>
+<p>Check and apply:</p>
+<div class="code" id="code-4" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo named-checkconf
+sudo named-checkzone school.lk /etc/bind/db.school.lk
+sudo systemctl restart bind9</code></pre></div>
+<div class="callout warn"><p>Remember to <strong>increase the serial number</strong> whenever you edit the zone. Also allow DNS in the firewall (<code>sudo ufw allow 53</code>).</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

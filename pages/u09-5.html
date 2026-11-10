@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9.5 Common faults and fixes | Server Administration and Networking</title>
+<meta name="description" content="9.5 Common faults and fixes. Unit 9 · Network Troubleshooting 9.5 Common faults and fixes Symptom Likely cause Fix 169.254.x.x address DHCP server unreachable Check cable/Wi-Fi, D">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u09-5.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 9 · Network Troubleshooting</div><h1><span class="num">9.5</span>Common faults and fixes</h1></header><article class="prose"><div class="table-wrap"><table class="data"><thead><tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr></thead><tbody><tr><td>169.254.x.x address</td><td>DHCP server unreachable</td><td>Check cable/Wi-Fi, DHCP service and scope; renew lease</td></tr><tr><td>Can ping IP but not name</td><td>DNS problem</td><td>Check client DNS settings, DNS server status, <code>nslookup</code>, flush cache</td></tr><tr><td>Can reach local hosts, not Internet</td><td>Wrong or missing gateway, ISP fault</td><td>Correct gateway, check router and WAN link</td></tr><tr><td>Intermittent connection</td><td>Bad cable, Wi-Fi interference, duplex mismatch</td><td>Replace cable, change channel, set speed/duplex</td></tr><tr><td>IP conflict message</td><td>Two devices with same IP</td><td>Use DHCP reservations, find the device with <code>arp -a</code></td></tr><tr><td>Website down, server pings fine</td><td>Web service stopped or port blocked</td><td><code>systemctl status</code>, check firewall and port 80/443</td></tr><tr><td>Cannot SSH or RDP</td><td>Service off, firewall, wrong port or credentials</td><td>Check service, <code>ss -tulpn</code>, firewall rules, logs</td></tr><tr><td>Certificate warning</td><td>Expired or mismatched certificate, wrong date on client</td><td>Renew certificate, check name and system clock</td></tr><tr><td>Server slow</td><td>CPU, RAM or disk exhausted, too many connections</td><td><code>top</code>, <code>df -h</code>, find the process, add resources</td></tr><tr><td>Server will not boot</td><td>Bad disk, corrupt update, wrong boot order</td><td>Boot recovery media, check disk health, restore from backup</td></tr><tr><td>Application crashes after update</td><td>Incompatible version, missing dependency</td><td>Read logs, roll back, reinstall dependency</td></tr><tr><td>Cannot send email</td><td>Wrong MX/SMTP settings, port 25 blocked, SPF failure</td><td>Check DNS records, mail logs, firewall</td></tr></tbody></table></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

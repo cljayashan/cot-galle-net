@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.2.2 Basic switch configuration | Server Administration and Networking</title>
+<meta name="description" content="3.2.2 Basic switch configuration. Unit 3 · Network Devices and Protocols 3.2.2 Basic switch configuration Cisco IOS CLI Copy Switch&gt; enable Switch# configure terminal Switch(config)# h">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u03-2-2.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 3 · Network Devices and Protocols</div><h1><span class="num">3.2.2</span>Basic switch configuration</h1></header><article class="prose"><div class="code" id="code-1" data-lang="cisco"><div class="code-head"><span class="lang lang-cisco">Cisco IOS CLI</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-cisco">Switch&gt; enable
+Switch# configure terminal
+Switch(config)# hostname SW1
+SW1(config)# enable secret StrongPass123
+SW1(config)# service password-encryption
+SW1(config)# banner motd # Authorized access only #
+SW1(config)# interface vlan 1
+SW1(config-if)# ip address 192.168.1.2 255.255.255.0
+SW1(config-if)# no shutdown
+SW1(config-if)# exit
+SW1(config)# ip default-gateway 192.168.1.1
+SW1(config)# line console 0
+SW1(config-line)# password ConPass123
+SW1(config-line)# login
+SW1(config-line)# exit
+SW1(config)# ip domain-name school.lk
+SW1(config)# username admin secret AdminPass123
+SW1(config)# crypto key generate rsa modulus 2048
+SW1(config)# ip ssh version 2
+SW1(config)# line vty 0 4
+SW1(config-line)# login local
+SW1(config-line)# transport input ssh
+SW1(config-line)# end
+SW1# copy running-config startup-config</code></pre></div>
+<div class="callout note"><p><strong>SSH needs more than <code>transport input ssh</code>.</strong> The switch also needs a domain name, an RSA key pair and a local user account, and the VTY lines must use <code>login local</code> so that SSH logins are checked against that user. A plain line password is not enough for SSH.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

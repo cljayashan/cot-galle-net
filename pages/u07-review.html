@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.8 Review: key terms and self-check | Server Administration and Networking</title>
+<meta name="description" content="7.8 Review: key terms and self-check. Unit 7 · Domain Name System (DNS) 7.8 Review: key terms and self-check Key terms Make sure you can explain each of these in your own words. The glossa">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u07-review.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.8</span>Review: key terms and self-check</h1></header><article class="prose"><h2 id="key-terms">Key terms</h2><p>Make sure you can explain each of these in your own words. The <a class="xref" href="appendix-a.html">glossary</a> has short definitions.</p><ul class="terms"><li>DNS</li><li>FQDN</li><li>root</li><li>TLD</li><li>zone</li><li>authoritative</li><li>recursive</li><li>resolver</li><li>TTL</li><li>A/AAAA/CNAME/MX/NS/PTR/SOA/TXT</li><li>zone transfer</li><li>DNSSEC</li><li>registrar</li><li>registry</li><li>registrant</li><li>glue record</li></ul><h2 id="self-check">Self-check questions</h2><p>Write your answers first, then open the answers to check them.</p><ol class="questions"><li>What problem does DNS solve?</li><li>List the components of the FQDN <code>mail.dept.school.lk.</code></li><li>Explain the difference between an authoritative and a recursive server.</li><li>Which record type would you create for an email server and for an alias?</li><li>What must you change in a zone file after every edit and why?</li><li>State the steps to register a domain and make a website available on it.</li><li>Which port and protocol does DNS use, and when does it use TCP?</li></ol><details class="answers"><summary>Show answers</summary><div class="answers-body"><ol class="ans-list"><li><p>It translates human-readable names to IP addresses (and other data) so people need not remember numbers.</p></li><li><p>Host <code>mail</code>; subdomain <code>dept</code>; second-level domain <code>school</code>; TLD <code>lk</code>; root (<code>.</code>).</p></li><li><p>An authoritative server holds the official records for a zone; a recursive resolver finds answers by querying other servers and caches them.</p></li><li><p>MX (mail server, together with an A record for the mail host); CNAME (alias).</p></li><li><p>Increase the SOA serial number so secondary servers know the zone changed and transfer it.</p></li><li><ol><li>Choose a name and check that it is available (registrar search or <code>whois</code>).</li><li>Select the TLD and an accredited registrar.</li><li>Register with your details and pay; enable WHOIS privacy, auto-renew, registrar lock and two-factor authentication.</li><li>Set the name servers (registrar, hosting provider or your own).</li><li>Create the records: A/AAAA for the website, MX for email, TXT for SPF and verification.</li><li>Wait for propagation (depends on TTL) and test with <code>dig</code>.</li><li>Upload the site to the server the A record points to, and renew the domain on time.</li></ol></li><li><p>UDP 53; TCP 53 for large responses and zone transfers.</p></li></ol></div></details><div class="callout tip"><p><strong>Next:</strong> when you are confident with this unit, test yourself with the <a class="xref" href="revision-mcq.html">multiple-choice questions</a> for Unit 7 in the Final Revision section.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

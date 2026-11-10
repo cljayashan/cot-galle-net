@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.4.2 Practical: Ubuntu Server and a static IP | Server Administration and Networking</title>
+<meta name="description" content="5.4.2 Practical: Ubuntu Server and a static IP. Unit 5 · Server Installation, Setting Up and Configuration 5.4.2 Practical: Ubuntu Server and a static IP Practical: install Ubuntu Server in VirtualB">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u05-4-2.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 5 · Server Installation, Setting Up and Configuration</div><h1><span class="num">5.4.2</span>Practical: Ubuntu Server and a static IP</h1></header><article class="prose"><h2 id="practical-install-ubuntu-server-in-virtualbox">Practical: install Ubuntu Server in VirtualBox</h2>
+<ol><li>Create a VM: 2 CPUs, 2 GB RAM, 20 GB disk, network in Bridged or NAT with port forwarding.</li><li>Mount the Ubuntu Server ISO and start the VM.</li><li>Follow the installer; tick <strong>Install OpenSSH server</strong>.</li><li>After reboot log in and run:</li></ol>
+<div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo apt update &amp;&amp; sudo apt upgrade -y
+hostnamectl set-hostname server1
+ip a</code></pre></div>
+<h2 id="setting-a-static-ip-on-ubuntu-netplan">Setting a static IP on Ubuntu (Netplan)</h2>
+<p>Edit the YAML file in <code>/etc/netplan/</code> (for example <code>00-installer-config.yaml</code> or <code>50-cloud-init.yaml</code>; the name depends on the Ubuntu version):</p>
+<div class="code" id="code-2" data-lang="yaml"><div class="code-head"><span class="lang lang-yaml">YAML</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-yaml">network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      addresses: [192.168.1.10/24]
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]</code></pre></div>
+<p>Test the change with <code>sudo netplan try</code> (it rolls back automatically if you lose the connection), then make it permanent with <code>sudo netplan apply</code>.</p>
+<div class="callout warn"><p><strong>YAML indentation matters:</strong> use spaces, never tabs. The interface name (<code>enp0s3</code> here) must match the name shown by <code>ip a</code>.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

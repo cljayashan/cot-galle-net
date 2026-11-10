@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.8 Review: key terms and self-check | Server Administration and Networking</title>
+<meta name="description" content="4.8 Review: key terms and self-check. Unit 4 · Addressing Network Devices 4.8 Review: key terms and self-check Key terms Make sure you can explain each of these in your own words. The glos">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u04-review.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 4 · Addressing Network Devices</div><h1><span class="num">4.8</span>Review: key terms and self-check</h1></header><article class="prose"><h2 id="key-terms">Key terms</h2><p>Make sure you can explain each of these in your own words. The <a class="xref" href="appendix-a.html">glossary</a> has short definitions.</p><ul class="terms"><li>MAC</li><li>OUI</li><li>ARP</li><li>octet</li><li>subnet mask</li><li>CIDR</li><li>VLSM</li><li>private address</li><li>NAT</li><li>APIPA</li><li>default gateway</li><li>IPv6</li><li>link-local</li><li>SLAAC</li></ul><h2 id="self-check">Self-check questions</h2><p>Write your answers first, then open the answers to check them.</p><ol class="questions"><li>How many bits are in a MAC address and an IPv4 address?</li><li>Convert 203 to binary and <code>10010110</code> to decimal.</li><li>Which of these are private: 172.20.5.1, 172.32.0.1, 192.168.99.5, 11.0.0.1?</li><li>For 10.1.1.200/27 find network, broadcast and usable range.</li><li>How many usable hosts are in a /28?</li><li>What mask do you need for at least 500 hosts?</li><li>Shorten <code>fe80:0000:0000:0000:02aa:00ff:fe28:9c5a</code>.</li><li>What does ARP do?</li></ol><details class="answers"><summary>Show answers</summary><div class="answers-body"><ol class="ans-list"><li><p>MAC 48 bits; IPv4 32 bits.</p></li><li><p>203 = 128+64+8+2+1 = <code>11001011</code>; <code>10010110</code> = 128+16+4+2 = <strong>150</strong>.</p></li><li><p>172.20.5.1 and 192.168.99.5 are private. 172.32.0.1 is outside 172.16-172.31 and 11.0.0.1 is public.</p></li><li><p>/27 block size 32; 200 lies in 192-223: network <strong>10.1.1.192</strong>, broadcast <strong>10.1.1.223</strong>, usable <strong>10.1.1.193 - 10.1.1.222</strong>.</p></li><li><p>2^4 - 2 = <strong>14</strong>.</p></li><li><p>2^9 - 2 = 510 &gt;= 500, so 9 host bits, mask <strong>/23</strong> (255.255.254.0).</p></li><li><p><code>fe80::2aa:ff:fe28:9c5a</code>.</p></li><li><p>ARP finds the MAC address that corresponds to a known IP address on the local network.</p></li></ol></div></details><div class="callout tip"><p><strong>Next:</strong> when you are confident with this unit, test yourself with the <a class="xref" href="revision-mcq.html">multiple-choice questions</a> for Unit 4 in the Final Revision section.</p></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

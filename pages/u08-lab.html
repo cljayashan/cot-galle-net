@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.6 Hands-on lab: Firewalls and cryptography | Server Administration and Networking</title>
+<meta name="description" content="8.6 Hands-on lab: Firewalls and cryptography. Unit 8 · Network Security 8.6 Hands-on lab: Firewalls and cryptography Do these tasks on your own computer or in the lab using free software. Write do">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="u08-lab.html" data-root="../">
+<main class="content" id="content">
+<header class="page-head"><div class="eyebrow">Unit 8 · Network Security</div><h1><span class="num">8.6</span>Hands-on lab: Firewalls and cryptography</h1></header><article class="prose"><p>Do these tasks on your own computer or in the lab using free software. Write down what you see at each step: your notes are useful evidence for assessments and for revision.</p><div class="callout warn"><p><strong>Ethics:</strong> scan, test and attack only machines in your own lab. Scanning other people&#x27;s systems without written permission is illegal in many countries.</p></div>
+<ol class="tasks"><li>Enable UFW on an Ubuntu VM with default deny; allow only SSH and HTTP; test from another machine with <code>nmap</code> (own lab only).</li><li>Create a firewall rule on Windows to block ping (ICMP), test, then remove it.</li><li>Encrypt a file with a password using <code>openssl enc -aes-256-cbc -salt -pbkdf2 -in a.txt -out a.enc</code>, then decrypt it.</li><li>Generate an RSA key pair, sign a file with the private key, and verify with the public key (<code>openssl dgst -sha256 -sign</code> and <code>-verify</code>).</li><li>Open a HTTPS site in a browser, view the certificate and write down issuer, validity and the chain.</li></ol>
+<div class="code" id="code-1" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell"># encrypt and decrypt a file with a password (AES-256)
+openssl enc -aes-256-cbc -salt -pbkdf2 -in a.txt -out a.enc
+openssl enc -d -aes-256-cbc -pbkdf2 -in a.enc -out a-decrypted.txt
+
+# create a key pair, sign a file and verify the signature
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private.pem
+openssl pkey -in private.pem -pubout -out public.pem
+openssl dgst -sha256 -sign private.pem -out a.sig a.txt
+openssl dgst -sha256 -verify public.pem -signature a.sig a.txt</code></pre></div></article>
+</main>
+<noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/search-index.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
