@@ -28,7 +28,15 @@ ip a</code></pre></div>
       nameservers:
         addresses: [8.8.8.8, 1.1.1.1]</code></pre></div>
 <p>Test the change with <code>sudo netplan try</code> (it rolls back automatically if you lose the connection), then make it permanent with <code>sudo netplan apply</code>.</p>
-<div class="callout warn"><p><strong>YAML indentation matters:</strong> use spaces, never tabs. The interface name (<code>enp0s3</code> here) must match the name shown by <code>ip a</code>.</p></div></article>
+<div class="callout warn"><p><strong>YAML indentation matters:</strong> use spaces, never tabs. The interface name (<code>enp0s3</code> here) must match the name shown by <code>ip a</code>.</p></div>
+<h2 id="netplan-pitfalls">Netplan pitfalls</h2>
+<p>Ubuntu Server uses <strong>Netplan</strong> YAML files under <code>/etc/netplan/</code>. Small mistakes break networking completely:</p>
+<ul><li>Use <strong>spaces</strong>, never tabs, for indentation.</li><li>Interface name must match <code>ip a</code> (<code>enp0s3</code>, <code>eth0</code>, <code>ens33</code> …).</li><li>Prefix length is part of the address: <code>192.168.1.10/24</code>, not a separate old-style mask only.</li><li>Prefer <code>sudo netplan try</code> first: it applies the config and rolls back if you lose connectivity.</li></ul>
+<p>After a working static IP, set the hostname (<code>hostnamectl</code>), install updates, and confirm <code>ip a</code>, <code>ip route</code> and <code>ping</code> to the gateway.</p>
+<div class="callout example"><p><strong>Everyday example:</strong> in VirtualBox, Bridged mode gives the VM an address on your real LAN so other PCs can open <code>http://vm-ip</code>. NAT alone usually cannot be reached from other computers without port forwarding.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Static IP + gateway + DNS belong on every server.</li><li><code>netplan try</code> is safer than <code>apply</code> while you are learning.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

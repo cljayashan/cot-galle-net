@@ -18,7 +18,16 @@ curl http://localhost</code></pre></div>
 <p>Open a browser on another computer to <code>http://server-ip</code>; the default Apache page confirms success. Content lives in <code>/var/www/html</code>.</p>
 <h2 id="administration-tools">Administration tools</h2>
 <div class="table-wrap"><table class="data"><thead><tr><th>Task</th><th>Linux</th><th>Windows</th></tr></thead><tbody><tr><td>Manage services</td><td><code>systemctl start/stop/enable</code></td><td>Services console, <code>Get-Service</code></td></tr><tr><td>View processes</td><td><code>top</code>, <code>htop</code>, <code>ps</code></td><td>Task Manager, <code>Get-Process</code></td></tr><tr><td>Disk usage</td><td><code>df -h</code>, <code>du -sh</code></td><td>Disk Management, Storage Spaces</td></tr><tr><td>Users and groups</td><td><code>adduser</code>, <code>usermod</code>, <code>chmod</code>, <code>chown</code></td><td>Active Directory Users and Computers, Local Users</td></tr><tr><td>Logs</td><td><code>/var/log</code>, <code>journalctl</code></td><td>Event Viewer</td></tr><tr><td>Packages and updates</td><td><code>apt</code>, <code>dnf</code></td><td>Windows Update, WSUS</td></tr><tr><td>Scheduling</td><td><code>cron</code></td><td>Task Scheduler</td></tr><tr><td>Monitoring</td><td>Nagios, Zabbix, Prometheus</td><td>Performance Monitor, SCOM</td></tr><tr><td>Backup</td><td><code>rsync</code>, <code>tar</code>, Bacula</td><td>Windows Server Backup</td></tr></tbody></table></div>
-<p><strong>Linux permissions:</strong> <code>chmod 750 file</code> gives owner rwx (7), group r-x (5), others none (0).</p></article>
+<p><strong>Linux permissions:</strong> <code>chmod 750 file</code> gives owner rwx (7), group r-x (5), others none (0).</p>
+<h2 id="services-and-permissions-you-will-use-daily">Services and permissions you will use daily</h2>
+<p>On Linux, a background service is often called a <strong>daemon</strong>. <code>systemctl status apache2</code> shows whether it is running; <code>enable</code> makes it start at boot; <code>restart</code> reloads after config changes. Logs live under <code>/var/log/</code> or in the journal (<code>journalctl -u apache2</code>).</p>
+<h3 class="sub-head">Reading <code>chmod 750</code></h3>
+<p>Permissions are owner / group / others, each with r(4), w(2), x(1):</p>
+<ul><li><code>7</code> = 4+2+1 → owner read+write+execute</li><li><code>5</code> = 4+1 → group read+execute</li><li><code>0</code> → others nothing</li></ul>
+<p>So <code>chmod 750 script.sh</code> lets only the owner fully control the file and the group run it. Web content is often <code>644</code> for files and <code>755</code> for directories — group-writable web roots are a common vulnerability.</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Install the application that matches the role, then manage it with the OS tools (<code>systemctl</code>, Services, Event Viewer).</li><li>Permissions and logging are part of administration, not extras.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

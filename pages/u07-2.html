@@ -15,7 +15,15 @@
 <p>A <strong>Fully Qualified Domain Name (FQDN)</strong> names a host completely: <code>www.example.com.</code> (the trailing dot is the root).</p>
 <p>A <strong>zone</strong> is the portion of the namespace administered by one set of name servers; a zone file holds its records.</p>
 <h2 id="dns-server-roles">DNS server roles</h2>
-<div class="table-wrap"><table class="data"><thead><tr><th>Role</th><th>Function</th></tr></thead><tbody><tr><td>Authoritative server</td><td>Holds the official records for a zone (primary/master and secondary/slave, kept in sync by <strong>zone transfer</strong>)</td></tr><tr><td>Recursive resolver</td><td>Asks other servers on the client&#x27;s behalf and caches answers (your ISP, 8.8.8.8, 1.1.1.1)</td></tr><tr><td>Caching server</td><td>Stores answers for the record&#x27;s <strong>TTL</strong> to speed up repeated lookups</td></tr><tr><td>Forwarder</td><td>Passes queries it cannot answer to another resolver</td></tr><tr><td>Root and TLD servers</td><td>Direct resolvers down the tree</td></tr></tbody></table></div></article>
+<div class="table-wrap"><table class="data"><thead><tr><th>Role</th><th>Function</th></tr></thead><tbody><tr><td>Authoritative server</td><td>Holds the official records for a zone (primary/master and secondary/slave, kept in sync by <strong>zone transfer</strong>)</td></tr><tr><td>Recursive resolver</td><td>Asks other servers on the client&#x27;s behalf and caches answers (your ISP, 8.8.8.8, 1.1.1.1)</td></tr><tr><td>Caching server</td><td>Stores answers for the record&#x27;s <strong>TTL</strong> to speed up repeated lookups</td></tr><tr><td>Forwarder</td><td>Passes queries it cannot answer to another resolver</td></tr><tr><td>Root and TLD servers</td><td>Direct resolvers down the tree</td></tr></tbody></table></div>
+<h2 id="hierarchy-keeps-the-system-scalable">Hierarchy keeps the system scalable</h2>
+<p>No single server holds every name on Earth. Authority is delegated down the tree: root → TLD (<code>.lk</code>, <code>.com</code>) → organisation (<code>school.lk</code>) → hosts (<code>www.school.lk</code>). Each <strong>zone</strong> is a slice of that tree managed by a set of <strong>authoritative</strong> name servers.</p>
+<h3 class="sub-head">Roles you must separate mentally</h3>
+<ul><li><strong>Authoritative server:</strong> answers for zones it owns ("I am the official source for school.lk").</li><li><strong>Recursive resolver:</strong> does the walking of the tree <em>for</em> the client and caches answers (ISP DNS, <code>1.1.1.1</code>, a local BIND resolver).</li><li><strong>Forwarder:</strong> a resolver that hands hard work to another resolver (common on small internal DNS servers).</li></ul>
+<p>Primary (master) holds the writable zone data; secondaries (slaves) copy it with <strong>zone transfers</strong> so the domain still resolves if one server dies.</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>DNS is hierarchical: root, TLD, domain, host.</li><li>Authoritative ≠ recursive; many problems come from mixing those roles carelessly (open resolvers).</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

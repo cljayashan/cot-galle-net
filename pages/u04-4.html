@@ -14,6 +14,20 @@
 <div class="table-wrap"><table class="data"><thead><tr><th>CIDR</th><th>Mask</th><th>Host bits</th><th>Usable hosts</th></tr></thead><tbody><tr><td>/24</td><td>255.255.255.0</td><td>8</td><td>254</td></tr><tr><td>/25</td><td>255.255.255.128</td><td>7</td><td>126</td></tr><tr><td>/26</td><td>255.255.255.192</td><td>6</td><td>62</td></tr><tr><td>/27</td><td>255.255.255.224</td><td>5</td><td>30</td></tr><tr><td>/28</td><td>255.255.255.240</td><td>4</td><td>14</td></tr><tr><td>/29</td><td>255.255.255.248</td><td>3</td><td>6</td></tr><tr><td>/30</td><td>255.255.255.252</td><td>2</td><td>2</td></tr></tbody></table></div>
 <p><strong>Formulas:</strong></p>
 <ul><li>Usable hosts per subnet = 2^h - 2 (h = host bits; subtract the network address and broadcast address).</li><li>Number of subnets = 2^s (s = bits borrowed from the host part).</li><li>Block size = 256 - the interesting octet of the mask.</li></ul>
+
+<h2 id="reading-a-mask">Reading a mask</h2>
+<p>A mask of <code>/24</code> means the first 24 bits are the network identity and the remaining 8 bits identify hosts. Written in decimal that mask is <code>255.255.255.0</code> (twenty-four 1s, then eight 0s).</p>
+<h3 class="sub-head">Worked check: /26</h3>
+<p><code>/26</code> → 26 ones → binary mask ends with <code>11000000</code> in the last octet → decimal <strong>192</strong> → <code>255.255.255.192</code>.</p>
+<ul><li>Host bits <code>h</code> = 32 − 26 = <strong>6</strong></li><li>Addresses in each subnet = 2⁶ = <strong>64</strong></li><li>Usable hosts = 64 − 2 = <strong>62</strong> (subtract network and broadcast)</li></ul>
+<h3 class="sub-head">Block size shortcut</h3>
+<p>In the "interesting" octet (the first octet that is not 255 or 0 in the mask), block size = <strong>256 − that octet value</strong>. For <code>255.255.255.192</code>, interesting octet = 192, block size = 64. Subnets therefore start at 0, 64, 128, 192 in that octet.</p>
+<h3 class="sub-head">Borrowing bits for subnets</h3>
+<p>If you start from <code>/24</code> and need 4 equal subnets, you borrow 2 host bits because 2² = 4. The new prefix is <code>/26</code>. If you need 8 subnets you borrow 3 bits → <code>/27</code>. Always check that the remaining host bits still give enough usable hosts for the largest LAN.</p>
+<div class="callout warn"><p><strong>Common mistake:</strong> forgetting to subtract 2 for network and broadcast when counting usable hosts. A <code>/30</code> has 4 addresses but only <strong>2</strong> usable hosts — perfect for a point-to-point router link, useless for a room of PCs.</p></div>
+<div class="callout tip"><p><strong>Tip:</strong> memorise the row for <code>/24</code> to <code>/30</code> in the table on this page. Most exam and lab designs use those sizes.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Prefix length = number of network 1-bits in the mask.</li><li>Usable hosts = 2^h − 2; block size = 256 − interesting octet.</li><li>Borrow host bits to create more subnets; check hosts still fit.</li></ul></div>
 <div class="lab" id="subnet-lab"></div></article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>

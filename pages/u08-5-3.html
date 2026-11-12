@@ -16,7 +16,16 @@ sudo certbot renew --dry-run</code></pre></div>
 <div class="callout note"><p>This requires a real domain pointing to your server and ports 80/443 open.</p></div>
 <h2 id="practical-create-and-inspect-a-self-signed-certi">Practical: create and inspect a self-signed certificate</h2>
 <div class="code" id="code-2" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 365
-openssl x509 -in cert.pem -text -noout</code></pre></div><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u08-lab.html">8.6 hands-on lab</a> and the <a class="xref" href="u08-review.html">8.7 review questions</a>.</p></div></article>
+openssl x509 -in cert.pem -text -noout</code></pre></div><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u08-lab.html">8.6 hands-on lab</a> and the <a class="xref" href="u08-review.html">8.7 review questions</a>.</p></div>
+<h3 class="sub-head">After HTTPS works</h3>
+<ul><li>Redirect HTTP to HTTPS.</li><li>Check the certificate chain in a browser from another machine.</li><li>Calendar a renewal test; short-lived certs fail suddenly when automation breaks.</li><li>Lock down admin panels so they are not public on port 443 without auth.</li></ul>
+
+<h2 id="let-s-encrypt-in-practice">Let's Encrypt in practice</h2>
+<p><strong>Certbot</strong> (or similar) proves you own the domain (HTTP or DNS challenge), obtains a short-lived DV certificate, installs it in the web server, and can renew automatically. You still must open ports 80/443 and point DNS A/AAAA records at the server.</p>
+<div class="callout tip"><p><strong>Tip:</strong> certificates expire (Let's Encrypt in ~90 days). Always test renewals (<code>certbot renew --dry-run</code>) or HTTPS will suddenly fail.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Automated CAs make HTTPS free and routine; automation of renewal is part of the job.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

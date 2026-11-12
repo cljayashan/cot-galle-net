@@ -19,7 +19,13 @@
 <tr><td>Decrypt the message</td><td>receiver's <strong>private</strong> key</td></tr>
 <tr><td>Sign a message</td><td>sender's <strong>private</strong> key</td></tr>
 <tr><td>Verify a signature</td><td>sender's <strong>public</strong> key</td></tr></tbody></table></div>
-<div class="callout note"><p>&quot;Encrypting the hash with the private key&quot; describes RSA signatures. Other algorithms, such as ECDSA and Ed25519, calculate the signature differently, but the rule is the same: sign with the private key, verify with the public key.</p></div></article>
+<div class="callout note"><p>&quot;Encrypting the hash with the private key&quot; describes RSA signatures. Other algorithms, such as ECDSA and Ed25519, calculate the signature differently, but the rule is the same: sign with the private key, verify with the public key.</p></div>
+<h2 id="digital-signatures">Digital signatures</h2>
+<p>To sign: hash the document, encrypt/sign that hash with your <strong>private</strong> key, attach the signature. To verify: hash the document again, and check the signature with the sender's <strong>public</strong> key. Success proves (1) the document was not altered and (2) someone holding that private key signed it (<strong>non-repudiation</strong>, in practical terms).</p>
+<p>Certificates bind public keys to identities so verifiers know <em>whose</em> public key they are using (see <a class="xref" href="u08-5.html">8.5</a>).</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Private key signs; public key verifies.</li><li>Signature ≠ encryption of the whole file for secrecy; it proves origin and integrity.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

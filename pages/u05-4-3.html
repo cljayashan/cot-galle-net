@@ -15,7 +15,17 @@ New-NetIPAddress -InterfaceAlias &quot;Ethernet&quot; -IPAddress 192.168.1.20 -P
 Set-DnsClientServerAddress -InterfaceAlias &quot;Ethernet&quot; -ServerAddresses 192.168.1.10
 Install-WindowsFeature DNS, DHCP -IncludeManagementTools
 Get-WindowsFeature | Where-Object Installed</code></pre></div>
-<div class="callout tip"><p>These PowerShell commands do the same jobs as Server Manager. Change the interface name (<code>Get-NetAdapter</code> lists them) and the addresses to suit your network.</p></div></article>
+<div class="callout tip"><p>These PowerShell commands do the same jobs as Server Manager. Change the interface name (<code>Get-NetAdapter</code> lists them) and the addresses to suit your network.</p></div>
+<h2 id="why-these-first-tasks-come-before-roles">Why these first tasks come before roles</h2>
+<p>Adding DNS or DHCP on a machine that still has a random hostname, a DHCP-assigned address and unpatched services creates moving targets: clients cache the wrong IP, certificates disagree with the name, and attackers find known bugs. Finish identity (name), addressing (static IP), and updates first; then add roles; then harden the firewall to match those roles only.</p>
+<div class="callout example"><p><strong>Everyday example:</strong> a lab installs DHCP before setting a static IP on the server itself. After a reboot the server gets a new address from another DHCP box, and every client that was pointed at the old address stops resolving names.</p></div>
+
+<h2 id="first-hour-on-windows-server">First hour on Windows Server</h2>
+<ol><li><strong>Rename</strong> the computer and reboot (<code>Rename-Computer</code>).</li><li>Set a <strong>static IP</strong>, mask, gateway and DNS (<code>New-NetIPAddress</code>, <code>Set-DnsClientServerAddress</code>). Check the interface name with <code>Get-NetAdapter</code>.</li><li>Run <strong>Windows Update</strong> before adding public roles.</li><li>Add only needed <strong>roles</strong> (DNS, DHCP, AD DS, File Server…) with Server Manager or <code>Install-WindowsFeature</code>.</li><li>Enable the firewall appropriately and create a standard admin workflow (separate accounts, not shared passwords).</li></ol>
+<div class="callout warn"><p><strong>Common mistake:</strong> leaving a server on DHCP. If its address changes, every client, DNS record and firewall rule that pointed at the old IP breaks.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Same goals as Linux: identity, addressing, updates, roles, firewall, documentation.</li><li>PowerShell can do everything Server Manager can, and is easier to repeat.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

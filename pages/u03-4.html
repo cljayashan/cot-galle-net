@@ -10,7 +10,16 @@
 <body data-page="u03-4.html" data-root="../">
 <main class="content" id="content">
 <header class="page-head"><div class="eyebrow">Unit 3 · Network Devices and Protocols</div><h1><span class="num">3.4</span>Reference models</h1></header><article class="prose"><p>A <strong>reference model</strong> divides communication into layers so that vendors can build interoperable products and engineers can troubleshoot one layer at a time.</p>
-<div class="callout tip"><p><strong>Analogy:</strong> sending data is like posting a letter. You write the letter (application), put it in an envelope with the address (network layer), the post office sorts it (routers) and a van carries it (physical). The receiver reverses every step.</p></div><h2 id="in-this-section">In this section</h2><ul class="sub-topics"><li><a href="u03-4-1.html"><b>3.4.1</b>The OSI model</a></li><li><a href="u03-4-2.html"><b>3.4.2</b>The TCP/IP model and OSI comparison</a></li><li><a href="u03-4-3.html"><b>3.4.3</b>Encapsulation</a></li></ul></article>
+<div class="callout tip"><p><strong>Analogy:</strong> sending data is like posting a letter. You write the letter (application), put it in an envelope with the address (network layer), the post office sorts it (routers) and a van carries it (physical). The receiver reverses every step.</p></div>
+<h3 class="sub-head">Why layers?</h3>
+<p>Networking is a very big problem. Layering splits it into smaller jobs, each handled by one layer, which only needs to talk to the layer directly above and below it. This brings three benefits:</p>
+<ul><li><strong>Interoperability:</strong> a web browser from one company works over a Wi-Fi card from another and a router from a third, because each follows the standard for its own layer.</li><li><strong>Independent change:</strong> you can replace Wi-Fi with Ethernet (lower layers) without changing the browser (top layer).</li><li><strong>Troubleshooting:</strong> engineers can test one layer at a time. "The cable is fine, the IP address is fine, so the problem must be DNS" is layered thinking (see <a class="xref" href="u09-1.html">9.1</a>).</li></ul>
+<h3 class="sub-head">Two models</h3>
+<ul><li>The <strong>OSI model</strong> (7 layers) is a reference model used for teaching and troubleshooting. Its layer numbers are used every day: people say "Layer 2 switch" or "a Layer 7 firewall".</li><li>The <strong>TCP/IP model</strong> (4 layers) describes the protocols the Internet actually uses.</li></ul>
+
+<div class="callout concepts"><p><strong>Key words in this topic</strong></p>
+<ul><li><strong>OSI 7-layer model</strong>: teaching and troubleshooting map.</li><li><strong>TCP/IP model</strong>: the model the Internet actually implements.</li><li><strong>Encapsulation</strong>: data gains headers (and sometimes trailers) as it moves down the stack.</li></ul></div>
+<h2 id="in-this-section">In this section</h2><ul class="sub-topics"><li><a href="u03-4-1.html"><b>3.4.1</b>The OSI model</a></li><li><a href="u03-4-2.html"><b>3.4.2</b>The TCP/IP model and OSI comparison</a></li><li><a href="u03-4-3.html"><b>3.4.3</b>Encapsulation</a></li></ul></article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

@@ -33,7 +33,16 @@ mail  IN A   192.168.1.25
 <div class="code" id="code-4" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Terminal</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo named-checkconf
 sudo named-checkzone school.lk /etc/bind/db.school.lk
 sudo systemctl restart bind9</code></pre></div>
-<div class="callout warn"><p>Remember to <strong>increase the serial number</strong> whenever you edit the zone. Also allow DNS in the firewall (<code>sudo ufw allow 53</code>).</p></div></article>
+<div class="callout warn"><p>Remember to <strong>increase the serial number</strong> whenever you edit the zone. Also allow DNS in the firewall (<code>sudo ufw allow 53</code>).</p></div>
+<h3 class="sub-head">Minimal zone mental model</h3>
+<p>SOA (zone meta + serial) → NS (who is authoritative) → A/AAAA (hosts) → MX/TXT as required. If dig against <code>127.0.0.1</code> works but LAN clients fail, check listen addresses, firewall UDP/TCP 53, and whether clients really use this server as their resolver.</p>
+
+<h2 id="bind-workflow">BIND workflow</h2>
+<ol><li>Declare the zone in <code>named.conf.local</code> (zone name, type primary/master, file path).</li><li>Create the zone file with SOA, NS, A/AAAA and other records.</li><li>Run <code>named-checkconf</code> and <code>named-checkzone school.lk /etc/bind/db.school.lk</code>.</li><li>Reload (<code>systemctl reload bind9</code>) and test with <code>dig</code>.</li><li>Allow UDP/TCP 53 on the firewall <strong>only</strong> as required (authoritative to the world, or recursive only to your LAN).</li></ol>
+<p>Increase the <strong>serial</strong> (often <code>YYYYMMDDnn</code>) on every change so secondaries notice updates.</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Check config → check zone → reload → dig.</li><li>Serial number changes are mandatory for transfers to see updates.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

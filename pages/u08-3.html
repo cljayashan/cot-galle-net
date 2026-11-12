@@ -9,7 +9,13 @@
 </head>
 <body data-page="u08-3.html" data-root="../">
 <main class="content" id="content">
-<header class="page-head"><div class="eyebrow">Unit 8 · Network Security</div><h1><span class="num">8.3</span>Cryptography basics</h1></header><article class="prose"><p><strong>Encryption</strong> converts readable <strong>plaintext</strong> into unreadable <strong>ciphertext</strong> with an algorithm and a <strong>key</strong>; <strong>decryption</strong> reverses it. Security depends on the secrecy of the key, not the algorithm.</p><h2 id="in-this-section">In this section</h2><ul class="sub-topics"><li><a href="u08-3-1.html"><b>8.3.1</b>Symmetric encryption</a></li><li><a href="u08-3-2.html"><b>8.3.2</b>Asymmetric (public-key) encryption</a></li><li><a href="u08-3-3.html"><b>8.3.3</b>Comparison and the hybrid approach</a></li><li><a href="u08-3-4.html"><b>8.3.4</b>Hashing</a></li></ul></article>
+<header class="page-head"><div class="eyebrow">Unit 8 · Network Security</div><h1><span class="num">8.3</span>Cryptography basics</h1></header><article class="prose"><p><strong>Encryption</strong> converts readable <strong>plaintext</strong> into unreadable <strong>ciphertext</strong> with an algorithm and a <strong>key</strong>; <strong>decryption</strong> reverses it. Security depends on the secrecy of the key, not the algorithm.</p>
+<p><strong>Cryptography</strong> protects data mathematically: secrecy (encryption), integrity (hashing) and strong authentication (public-key signatures). TLS on HTTPS combines these ideas.</p>
+<div class="callout concepts"><p><strong>Key words in this topic</strong></p>
+<ul><li><strong>Symmetric</strong>: same key encrypts and decrypts.</li><li><strong>Asymmetric</strong>: public encrypts or verifies; private decrypts or signs.</li><li><strong>Hash</strong>: one-way fingerprint of data.</li><li><strong>Hybrid cryptography</strong>: asymmetric to share a symmetric session key (TLS).</li></ul></div>
+<h2 id="in-this-section">In this section</h2><ul class="sub-topics"><li><a href="u08-3-1.html"><b>8.3.1</b>Symmetric encryption</a></li><li><a href="u08-3-2.html"><b>8.3.2</b>Asymmetric (public-key) encryption</a></li><li><a href="u08-3-3.html"><b>8.3.3</b>Comparison and the hybrid approach</a></li><li><a href="u08-3-4.html"><b>8.3.4</b>Hashing</a></li></ul>
+<p>Read the four short topics in order: symmetric, asymmetric, how TLS combines them, then hashing. Together they explain HTTPS, VPN payloads, password storage and digital signatures in <a class="xref" href="u08-4.html">8.4</a>–<a class="xref" href="u08-5.html">8.5</a>.</p>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

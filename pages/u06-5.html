@@ -11,7 +11,19 @@
 <main class="content" id="content">
 <header class="page-head"><div class="eyebrow">Unit 6 · Virtual Private Network (VPN)</div><h1><span class="num">6.5</span>Benefits and limits</h1></header><article class="prose"><p><strong>Benefits:</strong> secure remote work, lower cost than leased lines, secure branch connectivity, protection on public Wi-Fi.</p>
 <p><strong>Limits:</strong> extra latency and processing, requires correct configuration and key management, a compromised VPN client can bring a threat inside the network, and a VPN does not protect against malware or phishing.</p>
-<div class="callout tip"><p><strong>Best practice:</strong> use strong authentication (certificates plus multi-factor), keep VPN software updated, apply least-privilege access and log connections.</p></div></article>
+<div class="callout tip"><p><strong>Best practice:</strong> use strong authentication (certificates plus multi-factor), keep VPN software updated, apply least-privilege access and log connections.</p></div>
+<h3 class="sub-head">Security boundary reminder</h3>
+<p>Treat every VPN user as a possible entry path into the LAN. Combine VPN auth with:</p>
+<ul><li>up-to-date endpoints,</li><li>MFA,</li><li>group-based routes (finance users need different internal nets than guests),</li><li>logging of connect/disconnect times.</li></ul>
+<p>A VPN without access control is only a longer network cable for attackers.</p>
+
+<h2 id="benefits-limits-and-split-tunnelling">Benefits, limits and split tunnelling</h2>
+<p><strong>Benefits:</strong> secure remote work, cheaper than private leased lines for branches, safer admin access than exposing RDP/SSH to the world, encryption on hostile networks.</p>
+<p><strong>Limits:</strong> encryption adds some latency and CPU use; keys and certificates must be managed; a compromised laptop can attack the internal network <em>through</em> the VPN; phishing and malware are not stopped by a tunnel.</p>
+<p><strong>Split tunnelling</strong> sends only company-destined traffic through the VPN and sends general Internet browsing straight out of the home ISP. That can improve speed but may bypass company filtering. Full tunnel sends everything through the organisation (stronger control, more load on the gateway).</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>VPN protects the path; endpoint security still matters.</li><li>Design authentication (MFA), routing (full vs split) and logging deliberately.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

@@ -27,7 +27,21 @@ sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT                            # 
 sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT                            # HTTP
 sudo iptables -A INPUT -j DROP                                                # everything else
 sudo iptables -L -n -v --line-numbers</code></pre></div>
-<div class="callout warn"><p><strong>Do not lock yourself out.</strong> A rule set that only allows port 80 and then drops everything also blocks SSH, local (loopback) traffic and the replies to the server&#x27;s own connections, so a remote server becomes unreachable. Allow loopback, established connections and SSH first. iptables rules are lost at reboot unless saved (for example with the <code>iptables-persistent</code> package).</p></div></article>
+<div class="callout warn"><p><strong>Do not lock yourself out.</strong> A rule set that only allows port 80 and then drops everything also blocks SSH, local (loopback) traffic and the replies to the server&#x27;s own connections, so a remote server becomes unreachable. Allow loopback, established connections and SSH first. iptables rules are lost at reboot unless saved (for example with the <code>iptables-persistent</code> package).</p></div>
+<h2 id="commands-mean-policy">Commands mean policy</h2>
+<p>On Ubuntu <strong>UFW</strong>:</p>
+<div class="code" id="code-3" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Shell</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 80,443/tcp
+sudo ufw enable
+sudo ufw status verbose</code></pre></div>
+<p>This denies unsolicited inbound traffic, keeps outbound open, and permits SSH and web. Always allow your admin access method <em>before</em> enabling a firewall on a remote VM, or you can lock yourself out.</p>
+<p>Windows Defender Firewall uses inbound/outbound rules per profile (Domain/Private/Public). <code>iptables</code>/<code>nftables</code> are the lower-level Linux tools UFW wraps.</p>
+<div class="callout warn"><p><strong>Common mistake:</strong> enabling UFW with no allow rule for SSH while connected only over SSH — you lose access until console recovery.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Set defaults, allow needed ports, then enable.</li><li>Test from another machine; keep a console/out-of-band path.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

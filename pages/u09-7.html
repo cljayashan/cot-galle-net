@@ -19,7 +19,15 @@
 <tr><td>Root cause</td><td>DNS server address typed incorrectly (should be 192.168.1.10)</td></tr>
 <tr><td>Fix</td><td>Set the adapter back to obtain DNS automatically (DHCP); <code>ipconfig /flushdns</code></td></tr>
 <tr><td>Time to resolve</td><td>15 minutes</td></tr>
-<tr><td>Follow-up</td><td>Remove local administrator rights so users cannot change network settings</td></tr></tbody></table></div><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u09-lab.html">9.8 hands-on lab</a> and the <a class="xref" href="u09-review.html">9.9 review questions</a>.</p></div></article>
+<tr><td>Follow-up</td><td>Remove local administrator rights so users cannot change network settings</td></tr></tbody></table></div><div class="callout viva"><p><strong>Check yourself.</strong> When you have finished this unit, try the <a class="xref" href="u09-lab.html">9.8 hands-on lab</a> and the <a class="xref" href="u09-review.html">9.9 review questions</a>.</p></div>
+<h2 id="what-to-write-in-a-ticket">What to write in a ticket</h2>
+<p>Good documentation turns a one-off save into institutional knowledge:</p>
+<ul><li><strong>Reported problem</strong> (user words) and <strong>actual impact</strong></li><li><strong>Environment</strong> (who, where, IP, VLAN, time)</li><li><strong>Steps to reproduce</strong> and tests you ran (commands + results)</li><li><strong>Root cause</strong> (not only the symptom)</li><li><strong>Fix applied</strong> and <strong>verification</strong></li><li><strong>Prevention</strong> (monitoring, config standard, user guidance)</li></ul>
+<p>Even a short lab notebook with timestamps helps assessments and real jobs. Templates beat blank pages when you are busy.</p>
+<div class="callout example"><p><strong>Sample line:</strong> "10:40 – PC Lab2-05 has APIPA. Cable OK. DHCP scope exhausted. Freed unused leases; PC received 10.20.1.45. Documented scope capacity warning."</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>If it is not written down, the organisation will solve it again from scratch.</li><li>Record cause and prevention, not only "fixed".</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

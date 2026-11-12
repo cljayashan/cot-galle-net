@@ -9,7 +9,17 @@
 </head>
 <body data-page="u07-5-2.html" data-root="../">
 <main class="content" id="content">
-<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.5.2</span>Windows Server DNS</h1></header><article class="prose"><ol><li>Server Manager &gt; Add Roles and Features &gt; <strong>DNS Server</strong>.</li><li>Open <strong>DNS Manager</strong>, right-click Forward Lookup Zones &gt; <strong>New Zone</strong> &gt; Primary zone &gt; name <code>school.lk</code>.</li><li>Right-click the zone &gt; <strong>New Host (A)</strong> to add records; tick Create associated PTR record if a reverse zone exists.</li><li>Configure <strong>Forwarders</strong> (for example 8.8.8.8) on the server properties.</li><li>Point clients&#x27; DNS setting to this server (usually through DHCP).</li></ol></article>
+<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.5.2</span>Windows Server DNS</h1></header><article class="prose"><ol><li>Server Manager &gt; Add Roles and Features &gt; <strong>DNS Server</strong>.</li><li>Open <strong>DNS Manager</strong>, right-click Forward Lookup Zones &gt; <strong>New Zone</strong> &gt; Primary zone &gt; name <code>school.lk</code>.</li><li>Right-click the zone &gt; <strong>New Host (A)</strong> to add records; tick Create associated PTR record if a reverse zone exists.</li><li>Configure <strong>Forwarders</strong> (for example 8.8.8.8) on the server properties.</li><li>Point clients&#x27; DNS setting to this server (usually through DHCP).</li></ol>
+<h3 class="sub-head">Checklist after the zone exists</h3>
+<ol><li>Create A records for servers students must reach.</li><li>Create PTR records if mail or policy requires reverse DNS.</li><li>Set forwarders for Internet lookups.</li><li>On DHCP, push your DNS server IP to clients.</li><li>From a client: <code>nslookup www.school.lk</code> and confirm the answering server is yours.</li></ol>
+<p>If clients still use <code>8.8.8.8</code> directly, they will never see your internal-only names.</p>
+
+<h2 id="windows-dns-in-ad-environments">Windows DNS in AD environments</h2>
+<p>On Windows Server, the DNS role often integrates with <strong>Active Directory</strong>. Creating a primary forward lookup zone for <code>school.lk</code>, then adding <strong>New Host (A)</strong> records (with optional PTR creation), gives names to servers and clients. Set <strong>forwarders</strong> (for example <code>8.8.8.8</code> or your ISP) so internal DNS can resolve Internet names. Point DHCP at your DNS server so clients learn it automatically.</p>
+<div class="callout tip"><p><strong>Tip:</strong> dynamic updates can register client names automatically in AD-integrated zones — useful, but restrict who may update.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>DNS Manager: zones, records, forwarders.</li><li>Clients must use your DNS IP (via DHCP) or they never see internal names.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

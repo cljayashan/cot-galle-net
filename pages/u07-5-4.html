@@ -9,7 +9,16 @@
 </head>
 <body data-page="u07-5-4.html" data-root="../">
 <main class="content" id="content">
-<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.5.4</span>DNS attacks and protection</h1></header><article class="prose"><p>Cache poisoning/spoofing, DNS amplification DDoS, tunnelling and hijacking. Protect with DNSSEC, restricted recursion (do not run an open resolver), rate limiting, patching, firewall rules and registrar account security (strong password and multi-factor authentication).</p></article>
+<header class="page-head"><div class="eyebrow">Unit 7 · Domain Name System (DNS)</div><h1><span class="num">7.5.4</span>DNS attacks and protection</h1></header><article class="prose"><p>Cache poisoning/spoofing, DNS amplification DDoS, tunnelling and hijacking. Protect with DNSSEC, restricted recursion (do not run an open resolver), rate limiting, patching, firewall rules and registrar account security (strong password and multi-factor authentication).</p>
+<h3 class="sub-head">Hardening one-liners</h3>
+<ul><li>Recursion: allow only LAN nets, not <code>any</code>.</li><li>Zone transfers: allow only listed secondary IPs.</li><li>Keep BIND/Windows DNS patched.</li><li>Monitor for sudden spikes in query rate (amplification abuse).</li><li>Registrar: MFA + lock so NS records cannot be hijacked quietly.</li></ul>
+
+<h2 id="attacks-and-simple-defences">Attacks and simple defences</h2>
+<div class="table-wrap"><table class="data"><thead><tr><th>Attack</th><th>Idea</th><th>Defence</th></tr></thead><tbody><tr><td>Cache poisoning</td><td>Feed a resolver a fake answer</td><td>DNSSEC validation; keep software patched; limit who may query</td></tr><tr><td>Amplification DDoS</td><td>Small spoofed query → large reply to victim</td><td>Disable open recursion; rate-limit; filter spoofing</td></tr><tr><td>Domain hijacking</td><td>Steal registrar login, change NS</td><td>MFA on registrar; registrar lock</td></tr><tr><td>DNS tunnelling</td><td>Hide data inside DNS queries</td><td>Monitor odd DNS patterns; restrict outbound DNS</td></tr></tbody></table></div>
+<p>An <strong>open resolver</strong> (anyone on the Internet may recurse through you) is a gift to attackers. Authoritative servers should answer for their zones; recursion should be limited to trusted client networks.</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Patch, restrict recursion, protect registrar accounts, consider DNSSEC.</li><li>DNS security is both server configuration and account hygiene.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

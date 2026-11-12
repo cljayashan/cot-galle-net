@@ -28,7 +28,17 @@ dig www.school.lk @192.168.1.10
 dig MX school.lk
 ipconfig /flushdns         # Windows: clear client cache
 resolvectl flush-caches    # Linux</code></pre></div>
-<p>Management tasks: add, change and delete records, set suitable TTLs, keep secondary servers in sync, secure <strong>zone transfers</strong> (allow only listed secondaries), enable logging, back up zone files, and consider <strong>DNSSEC</strong> (signs records so answers can be verified).</p></article>
+<p>Management tasks: add, change and delete records, set suitable TTLs, keep secondary servers in sync, secure <strong>zone transfers</strong> (allow only listed secondaries), enable logging, back up zone files, and consider <strong>DNSSEC</strong> (signs records so answers can be verified).</p>
+<h2 id="reverse-dns-idea">Reverse DNS idea</h2>
+<p>IPv4 reverse lookups use the <code>in-addr.arpa</code> domain with octets reversed. For <code>192.168.1.10</code>, the PTR name is <code>10.1.168.192.in-addr.arpa</code>. Mail servers often reject or flag mail from hosts without matching PTR records.</p>
+<h3 class="sub-head">Testing commands</h3>
+<div class="code" id="code-4" data-lang="shell"><div class="code-head"><span class="lang lang-shell">Shell</span><span class="code-actions"><button class="copy" type="button">Copy</button></span></div><pre><code class="lang-shell">dig www.school.lk +short
+dig @127.0.0.1 school.lk NS
+nslookup 192.168.1.10</code></pre></div>
+<p>Compare answers from your server versus a public resolver to see caching effects.</p>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>Reverse zone name = reversed network octets + <code>.in-addr.arpa</code>.</li><li>Test with dig/nslookup against a specific server using <code>@</code>.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>

@@ -24,7 +24,22 @@ SW1(config-if)# exit
 SW1(config)# interface fastEthernet 0/24
 SW1(config-if)# switchport mode trunk
 SW1(config-if)# end</code></pre></div>
-<p>Ports that carry several VLANs between switches are <strong>trunk</strong> ports (IEEE 802.1Q tagging).</p></article>
+<p>Ports that carry several VLANs between switches are <strong>trunk</strong> ports (IEEE 802.1Q tagging).</p>
+<h2 id="why-use-vlans">Why use VLANs?</h2>
+<p>Without VLANs, every device connected to the switches is in one large network: one broadcast domain. That causes three problems:</p>
+<ul><li><strong>Security:</strong> student PCs can reach staff PCs and servers directly.</li><li><strong>Broadcast traffic:</strong> every broadcast (such as ARP and DHCP requests) reaches every device, which wastes bandwidth and CPU as the network grows.</li><li><strong>Management:</strong> grouping users by department means rewiring whenever someone moves.</li></ul>
+<p>With VLANs, each group gets its own logical network, even on shared switches. Moving a user to another department is a one-line change on the switch port.</p>
+<h2 id="access-ports-and-trunk-ports">Access ports and trunk ports</h2>
+<ul><li>An <strong>access port</strong> belongs to exactly one VLAN and connects an end device such as a PC or printer. The PC does not know that VLANs exist; it sends and receives normal frames.</li><li>A <strong>trunk port</strong> carries traffic for <strong>many</strong> VLANs over one link, usually between switches, or from a switch to a router. To keep the VLANs apart, each frame is given a small <strong>802.1Q tag</strong> containing its VLAN number. The receiving switch reads the tag, removes it, and sends the frame only to ports in that VLAN.</li></ul>
+<p>One VLAN on a trunk, the <strong>native VLAN</strong> (VLAN 1 by default), is sent <em>untagged</em>. For security, many administrators change the native VLAN to an unused VLAN number.</p>
+<h2 id="vlans-and-ip-subnets">VLANs and IP subnets</h2>
+<p>Each VLAN is normally given its <strong>own IP subnet</strong>, for example VLAN 10 STAFF = 192.168.10.0/24 and VLAN 20 STUDENTS = 192.168.20.0/24. Devices in different VLANs <strong>cannot</strong> talk to each other unless a Layer 3 device routes between them. This is done either by a router with one trunk link divided into sub-interfaces (<strong>router-on-a-stick</strong>), or by a <strong>Layer 3 switch</strong>. That router is also where you can apply rules, for example "students may reach the web server but not the staff file server".</p>
+<h2 id="checking-vlans">Checking VLANs</h2>
+<p><code>show vlan brief</code> lists each VLAN and its access ports. Trunk ports are <strong>not</strong> listed there; use <code>show interfaces trunk</code> to see which ports are trunks and which VLANs they carry.</p>
+<div class="callout warn"><p><strong>Common mistakes:</strong> forgetting <code>switchport mode access</code> (the port may then negotiate to become a trunk); putting a PC in the wrong VLAN, so it gets no address or the wrong one; a trunk that does not allow a VLAN, so devices on another switch cannot reach it.</p></div>
+<div class="callout concepts"><p><strong>Remember</strong></p>
+<ul><li>A VLAN splits one switch into separate logical networks (separate broadcast domains).</li><li>Access ports carry one VLAN; trunk ports carry many, using 802.1Q tags.</li><li>Each VLAN is its own subnet, and a router or Layer 3 switch is needed between them.</li></ul></div>
+</article>
 </main>
 <noscript><p class="noscript">This site needs JavaScript for its menu, search and quizzes. <a href="../index.html">Home page</a></p></noscript>
 <script src="../assets/site-data.js"></script>
